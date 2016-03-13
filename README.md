@@ -1,2 +1,0 @@
-# now
-The NOW-project
