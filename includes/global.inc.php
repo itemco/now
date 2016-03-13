@@ -1,9 +1,11 @@
 <?php
 
+session_start();
+
 # auto include classes as they are called
 function __autoload($class_name)
 {
-    include_once "../classes/class.".$class_name.".inc.php";
+    include_once "class.".$class_name.".inc.php";
 }
 
 #debug function
@@ -21,8 +23,8 @@ function fnDebug($title, $data = "")
 
 #global variables that we set here for now. Should be set elsewhere later on!
 $domain = "pop.nu";
-#$domain = "ppm.nu";
+$user = "andhan";
 
 fnDebug("domain (global.inc)", $domain);
-
+fnDebug("user (global.inc)", $user);
 ?>
