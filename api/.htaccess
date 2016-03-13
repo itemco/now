@@ -1,0 +1,28 @@
+# Allow cross domain access and my custom headers and methods
+Header set Access-Control-Allow-Origin "*"
+#Header add Access-Control-Allow-Methods: "POST, GET, PUT, DELETE"
+Header add Access-Control-Allow-Methods: "GET"
+Header add Access-Control-Allow-Headers: "Origin, Content-Type, Accept"
+
+# Turn on URL rewriting
+RewriteEngine On
+
+# Installation directory
+RewriteBase /api/
+
+#add \ to "-fields, not sure if working tho
+#php_flag magic_quotes_gpc On
+
+# Protect application and system files from being viewed
+RewriteRule ^(application|modules|system) - [F,L]
+
+# Allow any files or directories that exist to be displayed directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rewrite all other URLs to index.php/
+RewriteRule .* index.php?$0 [QSA]
+
+# To get content-type with headers (not working with above)
+#RewriteRule .* - [E=HTTP_CONTENT_TYPE:%{HTTP:Content-Type},L]
+#RewriteRule .* index.php?$0 [E=HTTP_CONTENT_TYPE:%{HTTP:Content-Type},L]

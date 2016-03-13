@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tree>
+  <directory name="/var/www/master.sthlm.net/">
+    <directory name="public_html" mode="0755" prot="drwxr-xr-x" size="4096">
+      <file name="apc.php" mode="0644" prot="-rw-r--r--" size="46147"></file>
+      <directory name="api" mode="0755" prot="drwxr-xr-x" size="56">
+        <directory name="cs" mode="0755" prot="drwxr-xr-x" size="55">
+          <file name="digdis.sh" mode="0755" prot="-rwxr-xr-x" size="578"></file>
+          <file name="ReadMe.txt" mode="0644" prot="-rw-r--r--" size="81"></file>
+          <file name="utdata.sh" mode="0755" prot="-rwxr-xr-x" size="764"></file>
+        </directory>
+        <file name="index.php" mode="0644" prot="-rw-r--r--" size="8969"></file>
+        <directory name="sh" mode="0755" prot="drwxr-xr-x" size="4096">
+          <file name="100" mode="0644" prot="-rw-r--r--" size="0"></file>
+          <file name="cat.sh" mode="0644" prot="-rw-r--r--" size="476"></file>
+          <file name="cpu.sh" mode="0644" prot="-rw-r--r--" size="222"></file>
+          <file name="df.sh" mode="0644" prot="-rw-r--r--" size="265"></file>
+          <file name="fif.sh" mode="0755" prot="-rwxr-xr-x" size="888"></file>
+          <file name="free.sh" mode="0644" prot="-rw-r--r--" size="301"></file>
+          <file name="lsd.sh" mode="0644" prot="-rw-r--r--" size="554"></file>
+          <file name="lsf.sh" mode="0644" prot="-rw-r--r--" size="569"></file>
+          <file name="ls.sh" mode="0644" prot="-rw-r--r--" size="538"></file>
+          <file name="ps.sh" mode="0644" prot="-rw-r--r--" size="605"></file>
+          <file name="rpm.sh" mode="0644" prot="-rw-r--r--" size="354"></file>
+          <file name="who.sh" mode="0644" prot="-rw-r--r--" size="153"></file>
+        </directory>
+      </directory>
+      <file name="array.php" mode="0644" prot="-rw-r--r--" size="2378"></file>
+      <file name="cache.php" mode="0644" prot="-rw-r--r--" size="245"></file>
+      <directory name="classes" mode="0755" prot="drwxr-xr-x" size="79">
+        <file name="class.CURL.inc.php" mode="0644" prot="-rw-r--r--" size="2005"></file>
+        <file name="class.DBO.inc.php" mode="0644" prot="-rw-r--r--" size="9183"></file>
+        <file name="class.OUT.inc.php" mode="0644" prot="-rw-r--r--" size="3429"></file>
+      </directory>
+      <directory name="css" mode="0755" prot="drwxr-xr-x" size="4096">
+        <file name="3024-night.css" mode="0644" prot="-rw-r--r--" size="2115"></file>
+        <file name="bootstrap.css" mode="0644" prot="-rw-r--r--" size="152842"></file>
+        <file name="bootstrap.css.map" mode="0644" prot="-rw-r--r--" size="389227"></file>
+        <file name="bootstrap.min.css" mode="0644" prot="-rw-r--r--" size="121265"></file>
+        <file name="bootstrap.min.css.map" mode="0644" prot="-rw-r--r--" size="54416"></file>
+        <file name="bootstrap-theme.css" mode="0644" prot="-rw-r--r--" size="26719"></file>
+        <file name="bootstrap-theme.css.map" mode="0644" prot="-rw-r--r--" size="47706"></file>
+        <file name="bootstrap-theme.min.css" mode="0644" prot="-rw-r--r--" size="23414"></file>
+        <file name="bootstrap-theme.min.css.map" mode="0644" prot="-rw-r--r--" size="5532"></file>
+        <file name="codemirror.css" mode="0644" prot="-rw-r--r--" size="8381"></file>
+        <file name="neat.css" mode="0644" prot="-rw-r--r--" size="700"></file>
+        <file name="ui.jqgrid-bootstrap.css" mode="0644" prot="-rw-r--r--" size="18066"></file>
+        <file name="ui.jqgrid-bootstrap-ui.css" mode="0644" prot="-rw-r--r--" size="692"></file>
+        <file name="ui.jqgrid.css" mode="0644" prot="-rw-r--r--" size="16232"></file>
+      </directory>
+      <directory name="curl" mode="0755" prot="drwxr-xr-x" size="87">
+        <file name="class.CURL.inc.php" mode="0644" prot="-rw-r--r--" size="1959"></file>
+        <file name="class.DBO.inc.php" mode="0644" prot="-rw-r--r--" size="9183"></file>
+        <file name="index.php" mode="0644" prot="-rw-r--r--" size="2480"></file>
+      </directory>
+      <directory name="includes" mode="0755" prot="drwxr-xr-x" size="27">
+        <file name="global.inc.php" mode="0644" prot="-rw-r--r--" size="534"></file>
+      </directory>
+      <file name="index.php" mode="0644" prot="-rw-r--r--" size="3458"></file>
+      <directory name="js" mode="0755" prot="drwxr-xr-x" size="4096">
+        <file name="bootstrap.js" mode="0644" prot="-rw-r--r--" size="68954"></file>
+        <file name="bootstrap.min.js" mode="0644" prot="-rw-r--r--" size="36868"></file>
+        <file name="Changes.txt" mode="0644" prot="-rw-r--r--" size="46539"></file>
+        <file name="Chart.min.js" mode="0644" prot="-rw-r--r--" size="52091"></file>
+        <file name="codemirror.js" mode="0644" prot="-rw-r--r--" size="353244"></file>
+        <file name="grid.locale-en.js" mode="0644" prot="-rw-r--r--" size="7950"></file>
+        <file name="grid.locale-sv.js" mode="0644" prot="-rw-r--r--" size="5700"></file>
+        <file name="jquery-1.11.0.min.js" mode="0644" prot="-rw-r--r--" size="96381"></file>
+        <file name="jquery-2.2.0.min.js" mode="0644" prot="-rw-r--r--" size="85589"></file>
+        <file name="jquery.jqGrid.min.js" mode="0644" prot="-rw-r--r--" size="312811"></file>
+        <file name="jquery.min.js" mode="0644" prot="-rw-r--r--" size="85589"></file>
+        <file name="jquery.peity.min.js" mode="0644" prot="-rw-r--r--" size="3657"></file>
+        <directory name="mode" mode="0755" prot="drwxr-xr-x" size="26">
+          <file name="javascript.js" mode="0644" prot="-rw-r--r--" size="28078"></file>
+        </directory>
+        <file name="npm.js" mode="0644" prot="-rw-r--r--" size="484"></file>
+      </directory>
+      <directory name="lib" mode="0755" prot="drwxr-xr-x" size="6">
+      </directory>
+      <file name="old_index.php" mode="0644" prot="-rw-r--r--" size="24825"></file>
+      <directory name="plugins" mode="0755" prot="drwxr-xr-x" size="4096">
+        <file name="grid.addons.js" mode="0644" prot="-rw-r--r--" size="26435"></file>
+        <file name="grid.postext.js" mode="0644" prot="-rw-r--r--" size="1608"></file>
+        <file name="grid.setcolumns.js" mode="0644" prot="-rw-r--r--" size="5638"></file>
+        <file name="jquery.contextmenu.js" mode="0644" prot="-rw-r--r--" size="4452"></file>
+        <file name="jquery.searchFilter.js" mode="0644" prot="-rw-r--r--" size="37785"></file>
+        <file name="jquery.tablednd.js" mode="0644" prot="-rw-r--r--" size="17091"></file>
+        <file name="searchFilter.css" mode="0644" prot="-rw-r--r--" size="398"></file>
+        <file name="ui.multiselect.css" mode="0644" prot="-rw-r--r--" size="1915"></file>
+        <file name="ui.multiselect.js" mode="0644" prot="-rw-r--r--" size="11443"></file>
+      </directory>
+      <directory name="pocs" mode="0755" prot="drwxr-xr-x" size="23">
+        <file name="poc-01.php" mode="0644" prot="-rw-r--r--" size="5727"></file>
+      </directory>
+      <file name="robots.txt" mode="0644" prot="-rw-r--r--" size="27"></file>
+      <file name="servvars.php" mode="0644" prot="-rw-r--r--" size="131"></file>
+      <directory name="src" mode="0755" prot="drwxr-xr-x" size="4096">
+        <directory name="css" mode="0755" prot="drwxr-xr-x" size="4096">
+          <file name="ui.jqgrid-bootstrap.css" mode="0644" prot="-rw-r--r--" size="18066"></file>
+          <file name="ui.jqgrid-bootstrap-ui.css" mode="0644" prot="-rw-r--r--" size="692"></file>
+          <file name="ui.jqgrid.css" mode="0644" prot="-rw-r--r--" size="16232"></file>
+          <file name="ui.multiselect.css" mode="0644" prot="-rw-r--r--" size="1886"></file>
+        </directory>
+        <file name="grid.base.js" mode="0644" prot="-rw-r--r--" size="174714"></file>
+        <file name="grid.celledit.js" mode="0644" prot="-rw-r--r--" size="19897"></file>
+        <file name="grid.common.js" mode="0644" prot="-rw-r--r--" size="28060"></file>
+        <file name="grid.filter.js" mode="0644" prot="-rw-r--r--" size="50030"></file>
+        <file name="grid.formedit.js" mode="0644" prot="-rw-r--r--" size="89301"></file>
+        <file name="grid.grouping.js" mode="0644" prot="-rw-r--r--" size="24256"></file>
+        <file name="grid.import.js" mode="0644" prot="-rw-r--r--" size="12987"></file>
+        <file name="grid.inlinedit.js" mode="0644" prot="-rw-r--r--" size="24171"></file>
+        <file name="grid.jqueryui.js" mode="0644" prot="-rw-r--r--" size="20697"></file>
+        <file name="grid.pivot.js" mode="0644" prot="-rw-r--r--" size="16947"></file>
+        <file name="grid.subgrid.js" mode="0644" prot="-rw-r--r--" size="11351"></file>
+        <file name="grid.treegrid.js" mode="0644" prot="-rw-r--r--" size="28631"></file>
+        <file name="grid.utils.js" mode="0644" prot="-rw-r--r--" size="7297"></file>
+        <directory name="i18n" mode="0755" prot="drwxr-xr-x" size="4096">
+          <file name="grid.locale-ar.js" mode="0644" prot="-rw-r--r--" size="6054"></file>
+          <file name="grid.locale-bg.js" mode="0644" prot="-rw-r--r--" size="6881"></file>
+          <file name="grid.locale-ca.js" mode="0644" prot="-rw-r--r--" size="5716"></file>
+          <file name="grid.locale-cn.js" mode="0644" prot="-rw-r--r--" size="9251"></file>
+          <file name="grid.locale-cs.js" mode="0644" prot="-rw-r--r--" size="5752"></file>
+          <file name="grid.locale-de.js" mode="0644" prot="-rw-r--r--" size="8275"></file>
+          <file name="grid.locale-dk.js" mode="0644" prot="-rw-r--r--" size="5586"></file>
+          <file name="grid.locale-el.js" mode="0644" prot="-rw-r--r--" size="6609"></file>
+          <file name="grid.locale-en.js" mode="0644" prot="-rw-r--r--" size="7950"></file>
+          <file name="grid.locale-es.js" mode="0644" prot="-rw-r--r--" size="6128"></file>
+          <file name="grid.locale-fa.js" mode="0644" prot="-rw-r--r--" size="7829"></file>
+          <file name="grid.locale-fi.js" mode="0644" prot="-rw-r--r--" size="5910"></file>
+          <file name="grid.locale-fr.js" mode="0644" prot="-rw-r--r--" size="5697"></file>
+          <file name="grid.locale-gl.js" mode="0644" prot="-rw-r--r--" size="5866"></file>
+          <file name="grid.locale-he.js" mode="0644" prot="-rw-r--r--" size="5902"></file>
+          <file name="grid.locale-hr.js" mode="0644" prot="-rw-r--r--" size="7533"></file>
+          <file name="grid.locale-hu.js" mode="0644" prot="-rw-r--r--" size="5558"></file>
+          <file name="grid.locale-id.js" mode="0644" prot="-rw-r--r--" size="8086"></file>
+          <file name="grid.locale-is.js" mode="0644" prot="-rw-r--r--" size="5669"></file>
+          <file name="grid.locale-it.js" mode="0644" prot="-rw-r--r--" size="8019"></file>
+          <file name="grid.locale-ja.js" mode="0644" prot="-rw-r--r--" size="8298"></file>
+          <file name="grid.locale-kr.js" mode="0644" prot="-rw-r--r--" size="5706"></file>
+          <file name="grid.locale-lt.js" mode="0644" prot="-rw-r--r--" size="5718"></file>
+          <file name="grid.locale-me.js" mode="0644" prot="-rw-r--r--" size="5561"></file>
+          <file name="grid.locale-nl.js" mode="0644" prot="-rw-r--r--" size="6915"></file>
+          <file name="grid.locale-no.js" mode="0644" prot="-rw-r--r--" size="4634"></file>
+          <file name="grid.locale-pl.js" mode="0644" prot="-rw-r--r--" size="5776"></file>
+          <file name="grid.locale-pt-br.js" mode="0644" prot="-rw-r--r--" size="6111"></file>
+          <file name="grid.locale-pt.js" mode="0644" prot="-rw-r--r--" size="5814"></file>
+          <file name="grid.locale-ro.js" mode="0644" prot="-rw-r--r--" size="6055"></file>
+          <file name="grid.locale-ru.js" mode="0644" prot="-rw-r--r--" size="7296"></file>
+          <file name="grid.locale-sk.js" mode="0644" prot="-rw-r--r--" size="5726"></file>
+          <file name="grid.locale-sq.js" mode="0644" prot="-rw-r--r--" size="8097"></file>
+          <file name="grid.locale-sr.js" mode="0644" prot="-rw-r--r--" size="6471"></file>
+          <file name="grid.locale-sr-latin.js" mode="0644" prot="-rw-r--r--" size="5540"></file>
+          <file name="grid.locale-sv.js" mode="0644" prot="-rw-r--r--" size="5700"></file>
+          <file name="grid.locale-th.js" mode="0644" prot="-rw-r--r--" size="7554"></file>
+          <file name="grid.locale-tr.js" mode="0644" prot="-rw-r--r--" size="5782"></file>
+          <file name="grid.locale-tw.js" mode="0644" prot="-rw-r--r--" size="5341"></file>
+          <file name="grid.locale-uk.js" mode="0644" prot="-rw-r--r--" size="6895"></file>
+          <file name="grid.locale-vi.js" mode="0644" prot="-rw-r--r--" size="8428"></file>
+        </directory>
+        <file name="jqDnR.js" mode="0644" prot="-rw-r--r--" size="3319"></file>
+        <file name="jqModal.js" mode="0644" prot="-rw-r--r--" size="3670"></file>
+        <file name="jquery.fmatter.js" mode="0644" prot="-rw-r--r--" size="18762"></file>
+        <file name="jquery.jqGrid.js" mode="0644" prot="-rw-r--r--" size="525305"></file>
+      </directory>
+      <file name="who.php" mode="0644" prot="-rw-r--r--" size="66"></file>
+      <directory name="xml2json" mode="0755" prot="drwxr-xr-x" size="39">
+        <file name="index.php" mode="0644" prot="-rw-r--r--" size="1222"></file>
+        <file name="myfile.xml" mode="0644" prot="-rw-r--r--" size="12288"></file>
+      </directory>
+    </directory>
+  </directory>
+</tree>
