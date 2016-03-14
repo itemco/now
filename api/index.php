@@ -13,7 +13,7 @@ $OUT = new OUT;
 $OUT->timer_start();
 
 #set executed date-time
-$OUT->set_request("executed", date("Y-m-d H:i:s"));
+#$OUT->set_request("executed", date("Y-m-d H:i:s"));
 
 #set response-method
 $OUT->set_request("method", $_SERVER['REQUEST_METHOD']);
@@ -29,40 +29,21 @@ fnDebug("get (array)", $arr);
 $path = trim(strtolower($arr[0]), "/");
 fnDebug("path", $path);
 
+#split path to an array
 $split = explode("/", $path);
 fnDebug("split", $split);
 
-#somehow . are replaced with _ in array, weird!
-$temp = explode("_",$split[0]);
-$host = $temp[0];
-$OUT->set_request("host", $host);
-$OUT->set_request("domain", $domain);
-
-#fetch user for server, this array should be stored in db, not here!
-$server["emedsrv1u"]["user"] = "digdis";
-$server["efocapp1u"]["user"] = "focus2";
-$server["efocweb1u"]["user"] = "focus2";
-$server["eodassv2u"]["user"] = "streamserve";
-$server["epinsrv1u"]["user"] = "pin";
-$user = $server[$host]["user"];
-if (!$user) {
-  $user = "UNKNOWN";
-}
-fnDebug("user", $user);
-
-#add user to request-output
-$OUT->set_request("user", $user);
-
-#res?!
-$res = $split[1];
-fnDebug("res", $res);
-
-#NEEDS WORK! Because it wont be enough when doing db-stuff
-#but hey, I could add the title from db, ex "File List" aso, see below $cmd
-
 #get plugin
-$plugin = $split[2];
+$plugin = $split[0];
 $OUT->set_request("plugin", $plugin);
+
+#get host (if any)
+$host = $split[1];
+$OUT->set_request("host", $host);
+
+#get user (if any)
+$user = $split[2];
+$OUT->set_request("user", $user);
 
 #get params (if any)
 $params = null;
@@ -86,52 +67,111 @@ if (isset($_GET["filter"])) {
 $OUT->set_request("filter", $filter);
 
 #check if 'res' is valid, eg sh or db - NEEDS WORK!!!
-if (!in_array($res, ["sh","cs","df"])) {
-  $OUT->error("Resource '$res' is not valid");
-}
+#if (!in_array($res, ["sh","cs","df"])) {
+#  $OUT->error("Resource '$res' is not valid");
+#}
 
 #hard coded cmd-array - This should be fetched from DB (once)! or once everyday (eg cahced).
 #oh wait, I could use ["cache"] to set individual times, 0 = no cache
-$cmd["ls"]["title"] = "List files and directories";
-$cmd["ls"]["cmd"] = "sh/ls.sh $params";
-$cmd["ls"]["cache"] = 0;
-$cmd["lsd"]["title"] = "List files";
-$cmd["lsd"]["cmd"] = "sh/lsd.sh $params";
-$cmd["lsd"]["cache"] = 0;
-$cmd["lsf"]["title"] = "List directories";
-$cmd["lsf"]["cmd"] = "sh/lsf.sh $params";
-$cmd["lsf"]["cache"] = 0;
-$cmd["df"]["title"] = "Disc info";
-$cmd["df"]["cmd"] = "sh/df.sh $params";
+
+#$cmd["df"]["title"] = "Disc info";
+$cmd["df"]["cmd"] = "exec/df.sh";
 $cmd["df"]["cache"] = 60;
-$cmd["free"]["title"] = "Memory info";
-$cmd["free"]["cmd"] = "sh/free.sh $params";
-$cmd["free"]["cache"] = 60;
-$cmd["rpm"]["title"] = "Show installed rpm-packages";
-$cmd["rpm"]["cmd"] = "sh/rpm.sh $params";
-$cmd["rpm"]["cache"] = 300;
-$cmd["cpu"]["title"] = "CPU-info";
-$cmd["cpu"]["cmd"] = "sh/cpu.sh $params";
-$cmd["cpu"]["cache"] = 300;
-$cmd["ps"]["title"] = "Process info";
-$cmd["ps"]["cmd"] = "sh/ps.sh $params";
+$cmd["df"]["host"] = "optional";
+$cmd["df"]["user"] = "reject";
+$cmd["df"]["params"] = "reject";
+$cmd["df"]["type"] = "tbl";
+
+#$cmd["ps"]["title"] = "Process info";
+$cmd["ps"]["cmd"] = "exec/ps.sh $params";
 $cmd["ps"]["cache"] = 120;
-$cmd["who"]["title"] = "Who am I ?";
-$cmd["who"]["cmd"] = "sh/who.sh $params";
-$cmd["who"]["cache"] = 0;
-$cmd["fif"]["title"] = "Files in folders count";
-$cmd["fif"]["cmd"] = "sh/fif.sh $params";
-$cmd["fif"]["cache"] = 0;
-$cmd["cat"]["title"] = "View file";
-$cmd["cat"]["cmd"] = "sh/cat.sh $params";
+$cmd["ps"]["host"] = "optional";
+$cmd["ps"]["user"] = "reject";
+$cmd["ps"]["params"] = "optional";
+$cmd["ps"]["type"] = "tbl";
+
+#$cmd["ls"]["title"] = "List files and directories";
+$cmd["ls"]["cmd"] = "exec/ls.sh $params";
+$cmd["ls"]["cache"] = 0;
+$cmd["ls"]["host"] = "required";
+$cmd["ls"]["user"] = "required";
+$cmd["ls"]["params"] = "required";
+$cmd["ls"]["type"] = "tbl";
+
+#$cmd["cat"]["title"] = "View file";
+$cmd["cat"]["cmd"] = "exec/cat.sh $params";
 $cmd["cat"]["cache"] = 0;
+$cmd["cat"]["host"] = "required";
+$cmd["cat"]["user"] = "required";
+$cmd["cat"]["params"] = "required";
+$cmd["cat"]["type"] = "txt"; #eg data[txt], and base64-encoded, use this flag to know!
+
+#validate inputs
+
+if ($cmd[$plugin]["host"] == "required") {
+  if (empty($host)) {
+    $OUT->error("Plugin '$plugin' require hostname in path");
+  }
+}
+if ($cmd[$plugin]["host"] == "reject") {
+  if ($host) {
+    $OUT->error("Plugin '$plugin' don't want hostname in path");
+  }
+}
+if ($cmd[$plugin]["user"] == "required") {
+  if (empty($user)) {
+    $OUT->error("Plugin '$plugin' require user in path");
+  }
+}
+if ($cmd[$plugin]["user"] == "reject") {
+  if ($user) {
+    $OUT->error("Plugin '$plugin' don't want user in path");
+  }
+}
+if ($cmd[$plugin]["params"] == "required") {
+  if (empty($params)) {
+    $OUT->error("Plugin '$plugin' require params in path");
+  }
+}
+if ($cmd[$plugin]["params"] == "reject") {
+  if ($params) {
+    $OUT->error("Plugin '$plugin' don't want params in path");
+  }
+}
+  
+
+#Tanken med optional "host" är att man då ALLTID hämtar allt data från cache
+#Den ger då en lista på alla servrar med totaler typ, så /api/df/ hämtar cache "df--"
+# eller en summering av alla cache-variabler som heter df-*"
+
+#$cmd["lsd"]["title"] = "List files";
+$cmd["lsd"]["cmd"] = "exec/lsd.sh $params";
+$cmd["lsd"]["cache"] = 0;
+#$cmd["lsf"]["title"] = "List directories";
+$cmd["lsf"]["cmd"] = "exec/lsf.sh $params";
+$cmd["lsf"]["cache"] = 0;
+#$cmd["free"]["title"] = "Memory info";
+$cmd["free"]["cmd"] = "exec/free.sh $params";
+$cmd["free"]["cache"] = 60;
+#$cmd["rpm"]["title"] = "Show installed rpm-packages";
+$cmd["rpm"]["cmd"] = "exec/rpm.sh $params";
+$cmd["rpm"]["cache"] = 300;
+#$cmd["cpu"]["title"] = "CPU-info";
+$cmd["cpu"]["cmd"] = "exec/cpu.sh $params";
+$cmd["cpu"]["cache"] = 300;
+#$cmd["who"]["title"] = "Who am I ?";
+$cmd["who"]["cmd"] = "exec/who.sh $params";
+$cmd["who"]["cache"] = 0;
+#$cmd["fif"]["title"] = "Files in folders count";
+$cmd["fif"]["cmd"] = "exec/fif.sh $params";
+$cmd["fif"]["cache"] = 0;
 
 #These will have to change, not sure how yet
-$cmd["digdis"]["title"] = "Digitaldistribution service status";
-$cmd["digdis"]["cmd"] = "cs/digdis.sh $params";
+#$cmd["digdis"]["title"] = "Digitaldistribution service status";
+$cmd["digdis"]["cmd"] = "exec/cs.sh $params";
 $cmd["digdis"]["cache"] = 120;
-$cmd["utdata"]["title"] = "Utdata service status";
-$cmd["utdata"]["cmd"] = "cs/utdata.sh $params";
+#$cmd["utdata"]["title"] = "Utdata service status";
+$cmd["utdata"]["cmd"] = "exec/cs.sh $params";
 $cmd["utdata"]["cache"] = 120;
 
 #fnDebug("cmd array", $cmd);
@@ -141,7 +181,7 @@ if (!array_key_exists($plugin, $cmd)) {
   $OUT->error("Plugin '$plugin' is not valid");
 }
 #set req-title in output
-$OUT->set_request("title", $cmd[$plugin]["title"]);
+#$OUT->set_request("title", $cmd[$plugin]["title"]);
 
 #build cmd-string depending on if params is present - NEEDS WORK!!!
 if (isset($_GET["params"]) && $params != "") {
@@ -151,31 +191,31 @@ if (isset($_GET["params"]) && $params != "") {
 }
 fnDebug("exec", $exec);
 
-#execute cmd on client with ssh
+#build ssh-command, in case we have to execute it (cache depreciated)
+#obs, not necessarily a ssh-command, could be curl or something else
+#we could run ssh with now@localhost though, to make things easier :)
+if (empty($user)) {
+  $user= "now";
+}
 $ssh = "ssh $user@$host 'bash -s' -- < $exec 2>&1";
-fnDebug("ssh-string", $ssh);
+fnDebug("ssh-command", $ssh);
 
-#execute it. Now testing with cache!
-
-$ssh_ser = serialize($ssh);
-fnDebug("ssh_ser", $ssh_ser);
-
-#alternative saving-path, oh oh and params?!
-#No, we should NOT cache "cat" and similar!
-$ssh_ser = $host."-".$plugin;
-fnDebug("ssh_ser alternative", $ssh_ser);
+#build a cache-variable that we can use to save result in cache
+$cache_var = $plugin."-".$host."-".$user;
+fnDebug("cache_var", $cache_var);
 
 #fetch from cache (if it's there)
-
 $cache_timeout = $cmd[$plugin]["cache"];
-
-if ($result = apc_fetch($ssh_ser)) {
+if ($result = apc_fetch($cache_var)) {
   fnDebug("Checking cache", "Cache is fresh (<".$cache_timeout."s), returning cached result");
   $OUT->set_response("source", "cache");
 } else {
   fnDebug("Checking cache","Not in cache, executing command");
   $OUT->set_response("source", "live");
+  #executing ssh-command
   $result = trim(shell_exec($ssh));
+  fnDebug("result", $result);
+
   #bail out on errors, class returns valid array and exits
   if (strstr($result, "Could not resolve hostname")) {
     $OUT->error($result);
@@ -183,26 +223,19 @@ if ($result = apc_fetch($ssh_ser)) {
   if (strstr($result, "key verification failed")) {
     $OUT->error("Host key verification failed");
   }
-  #this might need some work, might wanna cache db-queries in the future, and they will prollycontain params
+  if (strstr($result, "Permission denied")) {
+    $OUT->error("Permission denied for user '$user'");
+  }
+  #this might need some work, might wanna cache db-queries in the future, and they will prolly contain params
   if ($cache_timeout > 0) {
-    apc_add($ssh_ser, $result, $cache_timeout);
-    fnDebug("Saved to cache for ".$cache_timeout."s");
+    apc_add($cache_var, $result, $cache_timeout);
+    fnDebug("Saved to cache as '$cache_var' for ".$cache_timeout."s");
   } else {
-    fnDebug("NOT saved to cache as '$plugin' cache-time is set to 0");
+    fnDebug("NOT saved to cache as '$cache_var' cache-timeout is set to 0");
   }
 }
-#fnDebug("ssh exec result (might be cached)", $result);
 
-if (strstr($result, "Could not resolve hostname")) {
-  $OUT->error($result);
-}
-if (strstr($result, "key verification failed")) {
-  $OUT->error("Host key verification failed");
-}
-
-#most responses are |-delimted, make it into an array
-# cat-result should not be split up in rows!
-#WEIRD to set data[0][0] but was because php53 doesnt support it
+#response are |-delimted, make it into an array
 $array = explode(PHP_EOL, $result);
 $rows = 0;
 foreach ($array as $row) {

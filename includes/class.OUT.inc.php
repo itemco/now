@@ -8,15 +8,15 @@ class OUT
     public function __construct()
     {
       $this->result["request"]["method"] = "N/A";
-      $this->result["request"]["host"] = "NA/";
-      $this->result["request"]["domain"] = "NA/";
-      $this->result["request"]["user"] = "N/A";
-      $this->result["request"]["title"] = "NA/";
       $this->result["request"]["plugin"] = "N/A";
+      $this->result["request"]["host"] = "NA/";
+      #$this->result["request"]["domain"] = "NA/";
+      $this->result["request"]["user"] = "N/A";
+      #$this->result["request"]["title"] = "NA/";
       $this->result["request"]["params"] = "N/A";
       $this->result["request"]["layout"] = "N/A";
       $this->result["request"]["filter"] = "N/A";
-      $this->result["request"]["executed"] = "N/A";
+      #$this->result["request"]["executed"] = "N/A";
       $this->result["response"]["alert"] = "N/A";
       $this->result["response"]["message"] = "N/A";
       $this->result["response"]["rows"] = "N/A";
