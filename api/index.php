@@ -195,7 +195,7 @@ fnDebug("exec", $exec);
 #obs, not necessarily a ssh-command, could be curl or something else
 #we could run ssh with now@localhost though, to make things easier :)
 if (empty($user)) {
-  $user= "now";
+  $user= "andhan"; #should be user "now" or similar, using andhan while debugging other stuff
 }
 $ssh = "ssh $user@$host 'bash -s' -- < $exec 2>&1";
 fnDebug("ssh-command", $ssh);

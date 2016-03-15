@@ -22,9 +22,9 @@ function fnDebug($title, $data = "")
 }
 
 #global variables that we set here for now. Should be set elsewhere later on!
-$domain = "pop.nu";
-$user = "andhan";
+#$domain = "pop.nu";
+#$user = "andhan";
 
-fnDebug("domain (global.inc)", $domain);
-fnDebug("user (global.inc)", $user);
+#fnDebug("domain (global.inc)", $domain);
+#fnDebug("user (global.inc)", $user);
 ?>
