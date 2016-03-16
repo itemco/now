@@ -106,6 +106,19 @@ $cmd["cat"]["user"] = "required";
 $cmd["cat"]["params"] = "required";
 $cmd["cat"]["type"] = "txt"; #eg data[txt], and base64-encoded, use this flag to know!
 
+#$cmd["dbs"]["title"] = "Database predefined query";
+$cmd["dbs"]["cmd"] = "exec/dbs.pl $params";
+$cmd["dbs"]["cache"] = 0;
+$cmd["dbs"]["host"] = "required";
+$cmd["dbs"]["user"] = "required";
+$cmd["dbs"]["params"] = "required";
+$cmd["dbs"]["type"] = "tbl";
+
+#special for dbs (just testing)
+if ($plugin == "dbs") {
+  $params = "/opt/focus2/batch/conf/db.properties 'SELECT name, value FROM systemvalue'";
+}
+
 #validate inputs
 
 if ($cmd[$plugin]["host"] == "required") {
@@ -183,6 +196,13 @@ if (!array_key_exists($plugin, $cmd)) {
 #set req-title in output
 #$OUT->set_request("title", $cmd[$plugin]["title"]);
 
+
+#special for dbs (just testing)
+if ($plugin == "dbs") {
+  $params = '/opt/focus2/batch/conf/db.properties "SELECT name, value FROM systemvalue"';
+}
+
+
 #build cmd-string depending on if params is present - NEEDS WORK!!!
 if (isset($_GET["params"]) && $params != "") {
   $exec = trim(str_replace("[params]", $params, $cmd[$plugin]["cmd"])); #not sure how to add params yet! str_replace?
@@ -198,6 +218,10 @@ if (empty($user)) {
   $user= "andhan"; #should be user "now" or similar, using andhan while debugging other stuff
 }
 $ssh = "ssh $user@$host 'bash -s' -- < $exec 2>&1";
+if ($plugin == "dbs") {
+  #$params = str_replace("'", "\'", $params); #must have \ before '
+  $ssh = "ssh $user@$host 'perl - $params' -- < $exec 2>&1";
+}
 fnDebug("ssh-command", $ssh);
 
 #build a cache-variable that we can use to save result in cache

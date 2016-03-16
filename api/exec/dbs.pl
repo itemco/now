@@ -20,33 +20,24 @@ use Data::Dumper;
 #print Dumper \@ARGV;
 
 if (!$ARGV[0]) {
-  print "ERROR|PROPERTIES-FILE parameter not specified\n";
+  print "ERROR|PROPERTIES-FILE not specified\n";
   exit;
 }
 if (!$ARGV[1]) {
-  print "ERROR|TABLE parameter not specified\n";
-  exit;
-}
-if (!$ARGV[2]) {
-  print "ERROR|WHERE parameter not specified\n";
+  print "ERROR|SQL-STATEMENT not specified\n";
   exit;
 }
 
 my $file = "$ARGV[0]";
-my $table = "$ARGV[1]";
-my $where = "$ARGV[2]";
+my $sql = "$ARGV[1]";
 
 #behaves different when using ssh, checking params again...
 if ($file =~ "--") {
-  print "ERROR|PROPERTIES-FILE parameter not specified\n";
+  print "ERROR|PROPERTIES-FILE not specified\n";
   exit;
 }
-if ($table =~ "--") {
-  print "ERROR|TABLE parameter not specified\n";
-  exit;
-}
-if ($where =~ "--") {
-  print "ERROR|WHERE parameter not specified\n";
+if ($sql =~ "--") {
+  print "ERROR|SQL-STATMENET not specified\n";
   exit;
 }
 
@@ -94,25 +85,18 @@ while (my $row = <$fh>) {
   }
 }
 
-#print "------------\n";
-#print "$db_host\n";
-#print "$db_name\n";
-#print "$db_user\n";
-#print "$db_pass\n";
-#print "------------\n";
-
 use DBI;
 my $dbh = DBI->connect("DBI:mysql:database=$db_name;host=$db_host", "$db_user", "$db_pass", {'RaiseError' => 1});
-my $sql = "SELECT COUNT(*) FROM $table WHERE $where";
+#my $sql = "SELECT COUNT(*) FROM $table WHERE $where";
 #print "$sql\n";
 my $sth = $dbh->prepare($sql);
-
 $sth->execute();
-print "$sql\n";
+#print "$sql\n";
 #while (my $ref = $sth->fetchrow_hashref()) {
 while (my @row = $sth->fetchrow_array) {
   #print "$ref->{'count'}\n";
-  print "$row[0]\n";
+  my $join = join('|', @row);
+  print "$join\n";
 }
 $sth->finish();
 $dbh->disconnect();
