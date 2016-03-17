@@ -225,7 +225,8 @@ if ($plugin == "dbs") {
 fnDebug("ssh-command", $ssh);
 
 #build a cache-variable that we can use to save result in cache
-$cache_var = $plugin."-".$host."-".$user;
+#not sure how to handle params vs cache, added here for now
+$cache_var = $plugin."-".$host."-".$user."-".$params;
 fnDebug("cache_var", $cache_var);
 
 #fetch from cache (if it's there)
