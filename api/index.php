@@ -114,6 +114,9 @@ $cmd["dbs"]["user"] = "required";
 $cmd["dbs"]["params"] = "required";
 $cmd["dbs"]["type"] = "tbl";
 
+
+$cmd["pb"]["cmd"] = "exec/pb.sh $params";
+
 #special for dbs (just testing)
 if ($plugin == "dbs") {
   $params = "/opt/focus2/batch/conf/db.properties 'SELECT name, value FROM systemvalue'";
