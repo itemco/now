@@ -23,6 +23,7 @@ class OUT
       $this->result["response"]["size"] = "N/A";
       $this->result["response"]["time"] = "N/A";
       $this->result["response"]["source"] = "N/A";
+      $this->result["data"]["src"] = "N/A";
       $this->result["data"]["tbl"] = "N/A";
       $this->result["data"]["txt"] = "N/A";
       $this->result["data"]["pie"] = "N/A";
@@ -38,6 +39,10 @@ class OUT
     public function set_response($key, $val) {
       fnDebug(__CLASS__."->".__FUNCTION__." ($key)", $val);
       $this->result["response"][$key] = $val;
+    }
+    public function set_src($arr) {
+      fnDebug(__CLASS__."->".__FUNCTION__, $arr);
+      $this->result["data"]["src"] = $arr;
     }
     public function set_tbl($arr) {
       fnDebug(__CLASS__."->".__FUNCTION__, $arr);
@@ -65,6 +70,7 @@ class OUT
       $this->result["response"]["rows"] = 0;
       $this->result["response"]["size"] = 0;
       $this->result["response"]["time"] = 0;
+      $this->result["data"]["src"] = [];
       $this->result["data"]["tbl"] = [];
       $this->result["data"]["txt"] = [];
       $this->result["data"]["pie"] = [];

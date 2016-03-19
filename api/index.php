@@ -2,6 +2,7 @@
 
 #global include
 require_once("../includes/global.inc.php");
+require_once("../includes/tree.inc.php");
 
 #activate class(es)...
 $OUT = new OUT;
@@ -114,8 +115,10 @@ $cmd["dbs"]["user"] = "required";
 $cmd["dbs"]["params"] = "required";
 $cmd["dbs"]["type"] = "tbl";
 
-
 $cmd["pb"]["cmd"] = "exec/pb.sh $params";
+
+$cmd["tree"]["cmd"] = "exec/tree.sh $params";
+$cmd["tail"]["cmd"] = "exec/tail.sh $params";
 
 #special for dbs (just testing)
 if ($plugin == "dbs") {
@@ -205,7 +208,6 @@ if ($plugin == "dbs") {
   $params = '/opt/focus2/batch/conf/db.properties "SELECT name, value FROM systemvalue"';
 }
 
-
 #build cmd-string depending on if params is present - NEEDS WORK!!!
 if (isset($_GET["params"]) && $params != "") {
   $exec = trim(str_replace("[params]", $params, $cmd[$plugin]["cmd"])); #not sure how to add params yet! str_replace?
@@ -262,6 +264,7 @@ if ($result = apc_fetch($cache_var)) {
     fnDebug("NOT saved to cache as '$cache_var' cache-timeout is set to 0");
   }
 }
+$src = base64_encode($result);
 
 #response are |-delimted, make it into an array
 $array = explode(PHP_EOL, $result);
@@ -274,12 +277,19 @@ foreach ($array as $row) {
 }
 $tbl = $data;
 
-#handle cat differently...
+#handle cat and tail differently...
 $txt = [];
-if ($plugin == "cat") {
+if ($plugin == "cat" || $plugin == "tail") {
   $tbl = [];
   $txt = base64_encode($result);
 }
+
+#handle tree-command, make it into jstree-format...
+if ($plugin == "tree") {
+  $tree = fnCreateTree($tbl);
+  $tbl = $tree;
+}
+
 
 #fnDebug("data (array)", $data);
 
@@ -337,6 +347,7 @@ if ($data[0][0] == "ERROR") {
   $OUT->set_response("message", $data[0][1]);
   $OUT->set_response("rows", 0);
   $OUT->set_response("size", 0);
+  $OUT->set_src([]);
   $OUT->set_tbl([]);
   $OUT->set_txt([]);
   $OUT->set_pie([]);
@@ -346,6 +357,7 @@ if ($data[0][0] == "ERROR") {
   $OUT->set_response("message", "Resource fetched successfully");
   $OUT->set_response("rows", $rows);
   $OUT->set_response("size", strlen(serialize($data)));
+  $OUT->set_src($src);
   $OUT->set_tbl($tbl);
   $OUT->set_txt($txt);
   $OUT->set_pie($pie);

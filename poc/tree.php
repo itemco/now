@@ -79,9 +79,9 @@
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <li><a href="#">/api/sh/tree/efocapp1u/?params=/opt/focus2/</a></li>
-    <li><a href="#">/api/sh/tree/efocapp1u/?params=/opt/focus2/batch/logs/</a></li>
-    <li><a href="#">/api/sh/tree/efocapp1u/?params=/var/log/focus2-services/</a></li>
+    <li><a href="#">/api/tree/efocapp1u/?params=/opt/focus2/</a></li>
+    <li><a href="#">/api/tree/efocapp1u/?params=/opt/focus2/batch/logs/</a></li>
+    <li><a href="#">/api/tree/efocapp1u/?params=/var/log/focus2-services/</a></li>
   </ul>
 </div>
 </div>
@@ -118,7 +118,7 @@ $('#win-01-tab1').on('changed.jstree', function (e, data) {
   link = data["node"]["a_attr"]["href"];
   console.log(link);
   if (link != "#") {
-    fnWin02("/api/efocapp1u/sh/tail/?params="+link);
+    fnWin02("/api/tail/efocapp1u/?params="+link);
   }
 });
 };
@@ -153,7 +153,7 @@ $.ajax({
 });
 };
 
-fnWin01("/api/sh/tree/efocapp1u/?params=/opt/focus2/batch/");
+fnWin01("/api/tree/efocapp1u/?params=/var/log/");
 //fnWin02("/api/emedsrv1u/sh/tail/?params=/opt/digitaldistribution/mediator-batch/conf/batch.properties");
 
 

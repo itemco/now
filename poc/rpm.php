@@ -52,8 +52,8 @@
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <li><a href="#">/api/sh/rpm/efocapp1u/?params=pm-focus</a></li>
-    <li><a href="#">/api/sh/rpm/efocapp1u/?params=glibc</a></li>
+    <li><a href="#">/api/rpm/efocapp1u/?params=pm-focus</a></li>
+    <li><a href="#">/api/rpm/efocapp1u/?params=glibc</a></li>
   </ul>
 </div>
 </div>
